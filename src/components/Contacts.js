@@ -25,6 +25,17 @@ export default function Contacts() {
                 }
             })
             .catch(err => console.log(err))
+
+            let array = JSON.parse(localStorage.getItem('mycontacts'));
+            if(array.includes(id)){
+                let num = array.indexOf(id);
+                // console.log(`mycontacts${[num]}`);
+                let arr = JSON.parse(localStorage.getItem("mycontacts"));
+                let newarr = arr.splice(num,1);
+                let strarr = JSON.stringify(arr);
+                localStorage.setItem("mycontacts",strarr);
+            }
+            // 
         }
     }
 

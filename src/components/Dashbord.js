@@ -11,10 +11,9 @@ export default function Dashbord() {
     useEffect(()=>{
         if(localStorage.getItem("mycontacts")!= undefined){
             let arr = JSON.parse(localStorage.getItem('mycontacts'));
-            console.log(arr);
             setCount(arr.length);
         }
-    })
+    },[])
 
     return (
         <div className='container mt-3'>
