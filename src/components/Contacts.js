@@ -33,6 +33,26 @@ export default function Contacts() {
         navigate(`/edit/${id}`);
     }
 
+    const localContact = (id)=>{
+        if(localStorage.getItem('mycontacts') != undefined){
+            let arr = JSON.parse(localStorage.getItem("mycontacts"));
+            if(arr.includes(id)){
+                alert("contact already added to the cart");
+            }
+            else{
+                arr.push(id);
+                localStorage.setItem("mycontacts",JSON.stringify(arr));
+                alert("Contact Added to local Store");
+            }
+        }
+        else {
+            let arr = [];
+            arr.push(id);
+            localStorage.setItem('mycontacts',JSON.stringify(arr));
+            alert("contact added to local");
+        }
+    }
+
 
   return (
     <>
@@ -55,7 +75,8 @@ export default function Contacts() {
                 <td>{data.pcno}</td>
                 <td>
                     <button className="btn btn-warning me-2" onClick={() => editContact(data.id)}>Edit</button>
-                    <button className="btn btn-danger" onClick={() => delContact(data.id)}>Delete</button>
+                    <button className="btn btn-danger me-2" onClick={() => delContact(data.id)}>Delete</button>
+                    <button className="btn btn-success" onClick={() => localContact(data.id)}>local</button>
                 </td>
             </tr>
             )}
