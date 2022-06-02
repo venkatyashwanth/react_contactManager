@@ -1,19 +1,13 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import { Link } from 'react-router-dom';
 import Contacts from './Contacts';
 import { useState, useEffect } from 'react';
-
+// import LocalContext from './LocalContext';
+import { LocalCountCont } from '../App';
 
 
 export default function Dashbord() {
-    let [count,setCount] = useState(0);
-    
-    useEffect(()=>{
-        if(localStorage.getItem("mycontacts")!= undefined){
-            let arr = JSON.parse(localStorage.getItem('mycontacts'));
-            setCount(arr.length);
-        }
-    },[])
+    const {count,onCountUpdate} = useContext(LocalCountCont);
 
     return (
         <div className='container mt-3'>
@@ -24,7 +18,9 @@ export default function Dashbord() {
                 <Link className="btn btn-primary me-2" to="/add">
                     Add Contact
                 </Link>
-                <button className='btn btn-light me-2'>Locol Contacts <span>{count}</span></button>
+                <button type="button" className="btn btn-primary me-2">
+                    Locol Contacts <span className="badge bg-secondary">{count.length}</span>
+                </button>
             </div>
         </div>
     )

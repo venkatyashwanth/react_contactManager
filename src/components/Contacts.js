@@ -1,10 +1,13 @@
-import React, { useState,useEffect } from 'react';
+import React, { useState,useEffect,useContext } from 'react';
 import { getContacts, deleteContact } from '../config/Myservice';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import Editform from './Editform';
+import { LocalCountCont } from '../App';
+
 
 export default function Contacts() {
+    const {count,onCountUpdate} = useContext(LocalCountCont);
     const [info,setInfo] = useState([]);
     const navigate = useNavigate();
     useEffect(()=>{
@@ -29,13 +32,12 @@ export default function Contacts() {
             let array = JSON.parse(localStorage.getItem('mycontacts'));
             if(array.includes(id)){
                 let num = array.indexOf(id);
-                // console.log(`mycontacts${[num]}`);
                 let arr = JSON.parse(localStorage.getItem("mycontacts"));
                 let newarr = arr.splice(num,1);
                 let strarr = JSON.stringify(arr);
                 localStorage.setItem("mycontacts",strarr);
+                onCountUpdate(arr);
             }
-            // 
         }
     }
 
@@ -48,12 +50,13 @@ export default function Contacts() {
         if(localStorage.getItem('mycontacts') != undefined){
             let arr = JSON.parse(localStorage.getItem("mycontacts"));
             if(arr.includes(id)){
-                alert("contact already added to the cart");
+                alert("contact already added");
             }
             else{
                 arr.push(id);
                 localStorage.setItem("mycontacts",JSON.stringify(arr));
-                alert("Contact Added to local Store");
+                alert("Contact Added to localstorage");
+                onCountUpdate(arr);
             }
         }
         else {
@@ -61,6 +64,7 @@ export default function Contacts() {
             arr.push(id);
             localStorage.setItem('mycontacts',JSON.stringify(arr));
             alert("contact added to local");
+            onCountUpdate(arr)
         }
     }
 

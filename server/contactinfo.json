@@ -1,16 +1,3 @@
 {
-  "contacts": [
-    {
-      "pname": "abcde",
-      "pemail": "abc@gmail.com",
-      "pcno": "1234567899",
-      "id": 2
-    },
-    {
-      "pname": "maaven",
-      "pemail": "ma@gmail.com",
-      "pcno": "90909090901",
-      "id": 3
-    }
-  ]
+  "contacts": []
 }
